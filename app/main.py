@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, status
 from schemas import TaskCreate, TaskPatch, TaskUpdate, TaskResponse
 
+#Stage 1: Using in memory storage
 
 app = FastAPI(title='TaskFlow API')
 
