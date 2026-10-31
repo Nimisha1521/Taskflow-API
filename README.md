@@ -8,11 +8,11 @@ TaskFlow is a task management backend designed to understand and implement backe
 
 The project follows a progressive development approach, where each stage introduces a new concept and improves the application's architecture.
 
-Instead of directly starting with a database, the application was initially developed using Python lists and dictionaries. It is then upgraded to use SQLAlchemy ORM and subsequently migrated to PostgreSQL.
+Instead of directly starting with a database, the application was initially developed using Python lists and dictionaries. It was then upgraded to SQLAlchemy ORM with SQLite, with PostgreSQL integration planned as the next stage.
 
 ## Development Journey
 
-### Stage 1: In-Memory Storage (Python Lists & Dictionaries)
+### Stage 1: In-Memory Storage (Python Lists & Dictionaries) — Completed
 
 - Initially implemented task management using Python lists and dictionaries.
 - Developed basic CRUD operations:
@@ -22,26 +22,28 @@ Instead of directly starting with a database, the application was initially deve
   - Delete tasks
 - Implemented API endpoints using FastAPI.
 - Understood HTTP methods, routing, request handling and status codes.
-- Data is stored temporarily in application memory and does not persist after restarting the application.
+- Data was stored temporarily in application memory and did not persist after restarting the application.
 
-### Stage 2: Database Integration (SQLAlchemy ORM + SQLite)
+### Stage 2: Database Integration (SQLAlchemy ORM + SQLite) — Implemented
 
-**Planned / In Progress**
+- Replaced in-memory list-based storage with database-backed operations.
+- Integrated SQLAlchemy ORM for database interaction.
+- Created database models to represent application entities.
+- Configured SQLite database connectivity using SQLAlchemy Engine.
+- Implemented database session management using `sessionmaker`.
+- Used FastAPI dependency injection to manage database sessions.
+- Implemented CRUD operations using SQLAlchemy queries.
+- Used database transactions with `commit()`, `rollback()` and `refresh()`.
 
-- Replace in-memory storage with database-backed operations.
-- Integrate SQLAlchemy ORM.
-- Create database models and establish database connectivity.
-- Implement session management and database transactions.
-- Use SQLite for persistent data storage.
+**Key Improvement:** Unlike the initial list-based implementation, tasks are now stored persistently in SQLite and remain available even after restarting the application.
 
-### Stage 3: PostgreSQL Migration
-
-**Planned**
+### Stage 3: PostgreSQL Migration — Planned
 
 - Migrate the existing SQLite implementation to PostgreSQL.
 - Configure PostgreSQL database connectivity.
-- Understand relational database management in a production-oriented environment.
-- Improve database architecture and scalability.
+- Understand PostgreSQL database configuration and management.
+- Explore database migrations and schema management.
+- Improve database architecture and prepare the application for production-oriented deployment.
 
 ## Technology Stack
 
@@ -49,8 +51,10 @@ Instead of directly starting with a database, the application was initially deve
 |---|---|
 | Programming Language | Python |
 | Backend Framework | FastAPI |
-| ORM | SQLAlchemy (Stage 2) |
-| Database | In-Memory Storage (Stage 1), SQLite (Stage 2), PostgreSQL (Stage 3) |
+| ORM | SQLAlchemy |
+| Previous Storage | Python Lists & Dictionaries |
+| Current Database | SQLite |
+| Planned Database | PostgreSQL |
 | API Testing | Postman |
 | Version Control | Git & GitHub |
 
@@ -67,10 +71,11 @@ taskflow-api/
 │
 ├── requirements.txt
 ├── .gitignore
-└── README.md
+├── README.md
+└── taskflow.db  # Local database (not tracked by Git)
 ```
 
-*The project structure will evolve as new development stages are implemented.*
+*The project structure may evolve as new development stages are implemented.*
 
 ## Installation and Setup
 
@@ -107,15 +112,11 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-*Adjust the application import path if your main.py is located elsewhere.*
-
 ### 6. Explore API documentation
 
 Open the following URL in your browser:
 
-```text
 http://127.0.0.1:8000/docs
-```
 
 ## Learning Objectives
 
@@ -123,11 +124,16 @@ http://127.0.0.1:8000/docs
 - Implement CRUD operations.
 - Understand the difference between in-memory storage and persistent storage.
 - Learn SQLAlchemy ORM and database session management.
+- Understand database transactions and dependency injection.
 - Work with SQLite and PostgreSQL.
 - Understand Git version control and incremental project development.
 
 ## Project Status
 
-Currently at **Stage 1: In-Memory Storage**.
+**Current Stage: Stage 2 — SQLAlchemy ORM with SQLite**
+
+Stage 1 (In-Memory Storage) has been completed, and Stage 2 (Database Integration) has been implemented.
+
+Stage 3 (PostgreSQL Migration) is planned as the next development milestone.
 
 This project is actively evolving, with each development stage introducing new backend concepts and architectural improvements.
