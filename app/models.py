@@ -8,3 +8,4 @@ class Task(Base):
     id: Mapped[int] = MappedColumn(Integer, primary_key = True, index = True)
     title: Mapped[String] = MappedColumn(String, nullable=False)
     completed: Mapped[Boolean] =  MappedColumn(Boolean, nullable=False, default = False)
+    description: Mapped[String | None] = MappedColumn(String(500), nullable=True)

@@ -28,7 +28,7 @@ def get_tasks(db: Session = Depends(get_db)):
 #Define specific routes first and dynamic routes afterward.
 def filter_tasks(completed: bool, db: Session = Depends(get_db)):
 
-   statement = select(Task).where(Task.completed == completed)
+   statement = Select(Task).where(Task.completed == completed)
    result = db.scalars(statement).all()
    return result
 
