@@ -3,9 +3,13 @@ from fastapi.responses import JSONResponse
 from app.core.exceptions import TaskNotFoundError
 from app.api.v1.apiRouter import api_router
 import time
+import logging
+
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="TaskFlow API", description="Task management backend built using FastAPI and PostgreSQL", version="1.0.0")
 
+app.include_router(api_router, prefix="/api/v1")
 app.include_router(api_router, prefix="/api/v1")
 
 @app.exception_handler(TaskNotFoundError)
