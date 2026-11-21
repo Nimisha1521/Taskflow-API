@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from app.modules.users.models import User
-from app.core.security import hash_password
+from app.core.security import hash_password, verify_password
 from app.modules.users.repository import UserRepository
 from app.modules.users.schemas import UserCreate
 from sqlalchemy.exc import IntegrityError
@@ -23,3 +23,17 @@ class UserService:
 
         #Integrity constant exception and race condition 
         #The service-level email check gives a quick, readable error in ordinary cases; the database unique constraint handles concurrent requests reliably. Catching and translating the database exception makes the API robust.
+
+    def authenticate_user(self, email: str, password: str) -> User:
+        user = self.repository.get_by_email(email)
+
+        if not user: 
+            raise ValueError("Incorrect email or password.")
+        
+        if not verify_password(password, user.hashed_password):
+            raise ValueError("Incorrect email or password.")
+
+        if not user.is_active:
+            raise ValueError("Your account is inactive.")
+
+        return user
