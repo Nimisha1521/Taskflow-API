@@ -37,3 +37,5 @@ class UserService:
             raise ValueError("Your account is inactive.")
 
         return user
+
+#JWT uses the exp claim, represented as a Unix timestamp.
